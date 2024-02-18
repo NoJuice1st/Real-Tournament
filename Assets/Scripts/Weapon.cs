@@ -9,6 +9,12 @@ public class Weapon : MonoBehaviour
     public int ammo;
     public int maxAmmo;
 
+    public bool isAutoFire;
+
+    public float reloadTime = 2f;
+    public float shootInterval;
+    
+    float shootCooldown;
     bool isReloading;
     
     private void Start()
@@ -18,9 +24,15 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0)) Shoot();
+        //Manual Fire
+        if(!isAutoFire && Input.GetKeyDown(KeyCode.Mouse0)) Shoot();
 
-        if(Input.GetKeyDown(KeyCode.R) && ammo != maxAmmo) Reload();
+        //Auto Fire
+        if (isAutoFire && Input.GetKey(KeyCode.Mouse0)) Shoot();
+
+        if (Input.GetKeyDown(KeyCode.R) && ammo != maxAmmo) Reload();
+
+        if(shootCooldown >= 0) shootCooldown -= Time.deltaTime;
     }
 
     public void Shoot()
@@ -32,8 +44,12 @@ public class Weapon : MonoBehaviour
             return;
         };
 
+        if (shootCooldown > 0) return;
+
         Instantiate(bulletPrefab, transform.position, transform.rotation);
         ammo--;
+
+        shootCooldown = shootInterval;
     }
 
     async public void Reload()
@@ -42,7 +58,7 @@ public class Weapon : MonoBehaviour
 
         isReloading = true;
 
-        await new WaitForSeconds(2f);
+        await new WaitForSeconds(reloadTime);
 
         isReloading = false;
         ammo = maxAmmo;
