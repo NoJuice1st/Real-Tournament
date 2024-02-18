@@ -13,8 +13,8 @@ public class Rocket : MonoBehaviour
     public GameObject hitPrefab;
 
     private void Start() {
-        rb = GetComponent<Rigidbody>();
         Destroy(gameObject, 3f);
+        rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * speed);
     }
 
