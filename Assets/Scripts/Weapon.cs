@@ -5,12 +5,46 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    // Update is called once per frame
+
+    public int ammo;
+    public int maxAmmo;
+
+    bool isReloading;
+    
+    private void Start()
+    {
+        if (ammo <= 0) ammo = maxAmmo;
+    }
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Instantiate(bulletPrefab, transform.position, transform.rotation);
-        }
+        if(Input.GetKeyDown(KeyCode.Mouse0)) Shoot();
+
+        if(Input.GetKeyDown(KeyCode.R) && ammo != maxAmmo) Reload();
+    }
+
+    public void Shoot()
+    {
+        if (isReloading) return;
+
+        if (ammo <= 0) { 
+            Reload();
+            return;
+        };
+
+        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        ammo--;
+    }
+
+    async public void Reload()
+    {
+        if (isReloading) return;
+
+        isReloading = true;
+
+        await new WaitForSeconds(2f);
+
+        isReloading = false;
+        ammo = maxAmmo;
     }
 }
