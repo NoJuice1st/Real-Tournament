@@ -53,7 +53,7 @@ public class Weapon : MonoBehaviour
 
         if (shootCooldown > 0) return;
 
-        var spread = transform.position + new Vector3( Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
+        var spread = transform.rotation.eulerAngles + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
 
         if(multibulletAmount > 1)
         {
@@ -61,8 +61,8 @@ public class Weapon : MonoBehaviour
 
             for (int i = 0; i < multibulletAmount; i++)
             {
-                spread = transform.position + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
-                Instantiate(bulletPrefab, spread, transform.rotation);
+                spread = transform.rotation.eulerAngles + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
+                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(spread));
 
                 if (useMultibulletAmmo)
                 {
@@ -79,7 +79,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            Instantiate(bulletPrefab, spread, transform.rotation);
+            Instantiate(bulletPrefab, transform.position, Quaternion.Euler(spread));
             ammo--;
         }
 
