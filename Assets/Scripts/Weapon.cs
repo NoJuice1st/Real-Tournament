@@ -57,28 +57,23 @@ public class Weapon : MonoBehaviour
 
         if(multibulletAmount > 1)
         {
-            if (useMultibulletAmmo)
+            if (!useMultibulletAmmo) ammo--;
+
+            for (int i = 0; i < multibulletAmount; i++)
             {
-                for (int i = 0; i < multibulletAmount; i++)
+                spread = transform.position + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
+                Instantiate(bulletPrefab, spread, transform.rotation);
+
+                if (useMultibulletAmmo)
                 {
+                    ammo--;
+
                     if (ammo <= 0)
                     {
                         print("No amo");
                         Reload();
                         return;
                     }
-                    spread = transform.position + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
-                    Instantiate(bulletPrefab, spread, transform.rotation);
-                    ammo--;
-                }
-            }
-            else
-            {
-                ammo--;
-                for (int i = 0; i < multibulletAmount; i++)
-                {
-                    spread = transform.position + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
-                    Instantiate(bulletPrefab, spread, transform.rotation);
                 }
             }
         }
