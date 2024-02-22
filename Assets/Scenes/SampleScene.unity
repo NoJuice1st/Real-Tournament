@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 123828866}
   - component: {fileID: 123828865}
   - component: {fileID: 123828869}
+  - component: {fileID: 123828870}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -243,6 +244,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 123828870}
+        m_TargetAssemblyTypeName: DarkenOnDamageMod, Assembly-CSharp
+        m_MethodName: Darken
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &123828870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123828864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207e1247d5ac7ab44b7584bfa78dd273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 123828869}
+  darkenAmount: 0.1
 --- !u!1001 &126319972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -727,6 +760,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  onDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1542338222
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -826,6 +865,7 @@ GameObject:
   - component: {fileID: 1934426795}
   - component: {fileID: 1934426794}
   - component: {fileID: 1934426798}
+  - component: {fileID: 1934426799}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -935,6 +975,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1934426799}
+        m_TargetAssemblyTypeName: DarkenOnDamageMod, Assembly-CSharp
+        m_MethodName: Darken
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1934426799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934426793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207e1247d5ac7ab44b7584bfa78dd273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 1934426798}
+  darkenAmount: 0.1
 --- !u!1001 &496695824161839493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1003,12 +1075,112 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cede8f43b35f5fc478a7eef599a83b4a, type: 3}
+--- !u!114 &811327139615924047 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+    type: 3}
+  m_PrefabInstance: {fileID: 8635359861147581422}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639720510901493703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00d75b302fde444a994051bed5d7f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1639720510901493703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 413616115398796921, guid: b14e729a21f412d4ba7c23e227f5fb48,
+    type: 3}
+  m_PrefabInstance: {fileID: 8635359861147581422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2821458613191417777
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.081
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.189
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.17078424
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036406121511358650, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362042198304611091, guid: a372432dd7215664c90e46387e44da60,
+        type: 3}
+      propertyPath: m_Name
+      value: Debree
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a372432dd7215664c90e46387e44da60, type: 3}
 --- !u!4 &8243905540273356155 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2278308086777767028, guid: b14e729a21f412d4ba7c23e227f5fb48,
     type: 3}
   m_PrefabInstance: {fileID: 8635359861147581422}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8243905540273356156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639720510901493703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24cbd70788ba0b74aafc72c7fd3b5665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 811327139615924047}
+  isburstFire: 0
 --- !u!1001 &8635359861147581422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1074,33 +1246,87 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
         type: 3}
+      propertyPath: ammo
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: clipSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
       propertyPath: storedAmmo
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
         type: 3}
       propertyPath: bulletSpread
-      value: 0.3
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
         type: 3}
       propertyPath: shootInterval
-      value: 0.5
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: bulletsPerShot
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
         type: 3}
       propertyPath: multibulletAmount
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
         type: 3}
       propertyPath: useMultibulletAmmo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: onRightClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: onRightClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: onRightClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8243905540273356156}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: onRightClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: onRightClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BurstFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: onRightClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BurstMod, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5636593580321186874, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      propertyPath: onRightClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 413616115398796921, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8243905540273356156}
   m_SourcePrefab: {fileID: 100100000, guid: b14e729a21f412d4ba7c23e227f5fb48, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -1114,3 +1340,4 @@ SceneRoots:
   - {fileID: 1542338225}
   - {fileID: 126319972}
   - {fileID: 496695824161839493}
+  - {fileID: 2821458613191417777}

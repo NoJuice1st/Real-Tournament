@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Weapon : MonoBehaviour
 {
     public GameObject bulletPrefab;
 
-    public int multibulletAmount;
-    public bool useMultibulletAmmo;
+    public int bulletsPerShot;
 
-    public int storedAmmo;
     public int ammo;
     public int maxAmmo;
+    public int clipSize;
+    public int clipAmmo;
 
-    public float bulletSpread;
+    public float spreadAngle = 5f;
 
     public bool isAutoFire;
 
@@ -22,10 +23,14 @@ public class Weapon : MonoBehaviour
     
     float shootCooldown;
     bool isReloading;
+
+    public UnityEvent onRightClick;
+    public UnityEvent onShoot;
+    public UnityEvent onReload;
     
     private void Start()
     {
-        if(storedAmmo <= 0) storedAmmo = maxAmmo;
+        if(clipAmmo <= 0) clipAmmo = clipSize;
         if (ammo <= 0) ammo = maxAmmo;
     }
 
@@ -39,6 +44,9 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R) && ammo != maxAmmo) Reload();
 
+        if (Input.GetKeyDown(KeyCode.Mouse1)) onRightClick.Invoke();
+
+
         if(shootCooldown >= 0) shootCooldown -= Time.deltaTime;
     }
 
@@ -46,63 +54,46 @@ public class Weapon : MonoBehaviour
     {
         if (isReloading) return;
 
-        if (ammo <= 0) { 
+        if (clipAmmo <= 0) { 
             Reload();
             return;
         }
 
         if (shootCooldown > 0) return;
 
-        var spread = transform.rotation.eulerAngles + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
+        onShoot.Invoke();
 
-        if(multibulletAmount > 1)
+        for (int i = 0; i < bulletsPerShot; i++)
         {
-            if (!useMultibulletAmmo) ammo--;
+            var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        
+            var offsetX = Random.Range(-spreadAngle, spreadAngle);
+            var offsetY = Random.Range(-spreadAngle, spreadAngle);
 
-            for (int i = 0; i < multibulletAmount; i++)
-            {
-                spread = transform.rotation.eulerAngles + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
-                Instantiate(bulletPrefab, transform.position, Quaternion.Euler(spread));
-
-                if (useMultibulletAmmo)
-                {
-                    ammo--;
-
-                    if (ammo <= 0)
-                    {
-                        print("No amo");
-                        Reload();
-                        return;
-                    }
-                }
-            }
+            bullet.transform.eulerAngles += new Vector3(offsetX, offsetY, 0);
         }
-        else
-        {
-            Instantiate(bulletPrefab, transform.position, Quaternion.Euler(spread));
-            ammo--;
-        }
+
+        clipAmmo--;
 
         shootCooldown = shootInterval;
     }
 
     async public void Reload()
     {
-        if (storedAmmo <= 0) return;
         if (isReloading) return;
 
         isReloading = true;
 
+        onReload.Invoke();
+
         await new WaitForSeconds(reloadTime);
         
+        
+        var ammoToReload = Mathf.Min(ammo, clipSize);
+        ammo -= ammoToReload;
+        clipAmmo += ammoToReload;
+        
         isReloading = false;
-
-        for (int i = 0; i < maxAmmo; i++)
-        {
-            if (storedAmmo <= 0) return;
-            ammo += 1;
-            storedAmmo -= 1;
-        }
-
+        
     }
 }
