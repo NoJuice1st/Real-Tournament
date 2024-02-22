@@ -6,8 +6,14 @@ public class Weapon : MonoBehaviour
 {
     public GameObject bulletPrefab;
 
+    public int multibulletAmount;
+    public bool useMultibulletAmmo;
+
+    public int storedAmmo;
     public int ammo;
     public int maxAmmo;
+
+    public float bulletSpread;
 
     public bool isAutoFire;
 
@@ -19,6 +25,7 @@ public class Weapon : MonoBehaviour
     
     private void Start()
     {
+        if(storedAmmo <= 0) storedAmmo = maxAmmo;
         if (ammo <= 0) ammo = maxAmmo;
     }
 
@@ -42,25 +49,65 @@ public class Weapon : MonoBehaviour
         if (ammo <= 0) { 
             Reload();
             return;
-        };
+        }
 
         if (shootCooldown > 0) return;
 
-        Instantiate(bulletPrefab, transform.position, transform.rotation);
-        ammo--;
+        var spread = transform.position + new Vector3( Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
+
+        if(multibulletAmount > 1)
+        {
+            if (useMultibulletAmmo)
+            {
+                for (int i = 0; i < multibulletAmount; i++)
+                {
+                    if (ammo <= 0)
+                    {
+                        print("No amo");
+                        Reload();
+                        return;
+                    }
+                    spread = transform.position + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
+                    Instantiate(bulletPrefab, spread, transform.rotation);
+                    ammo--;
+                }
+            }
+            else
+            {
+                ammo--;
+                for (int i = 0; i < multibulletAmount; i++)
+                {
+                    spread = transform.position + new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread));
+                    Instantiate(bulletPrefab, spread, transform.rotation);
+                }
+            }
+        }
+        else
+        {
+            Instantiate(bulletPrefab, spread, transform.rotation);
+            ammo--;
+        }
 
         shootCooldown = shootInterval;
     }
 
     async public void Reload()
     {
+        if (storedAmmo <= 0) return;
         if (isReloading) return;
 
         isReloading = true;
 
         await new WaitForSeconds(reloadTime);
-
+        
         isReloading = false;
-        ammo = maxAmmo;
+
+        for (int i = 0; i < maxAmmo; i++)
+        {
+            if (storedAmmo <= 0) return;
+            ammo += 1;
+            storedAmmo -= 1;
+        }
+
     }
 }
