@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    public float speed = 100f;
+    public float speed = 500f;
     public int damage;
     public int bounceCount = 0;
 
@@ -19,9 +19,6 @@ public class Rocket : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other) {
-
-        //Destroy(gameObject);
-
         var health = other.gameObject.GetComponent<Health>();
 
         if(health != null) health.Damage(damage);

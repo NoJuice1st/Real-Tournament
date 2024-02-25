@@ -61,7 +61,6 @@ public class Weapon : MonoBehaviour
 
         if (shootCooldown > 0) return;
 
-        onShoot.Invoke();
 
         for (int i = 0; i < bulletsPerShot; i++)
         {
@@ -76,6 +75,7 @@ public class Weapon : MonoBehaviour
         clipAmmo--;
 
         shootCooldown = shootInterval;
+        onShoot.Invoke();
     }
 
     async public void Reload()
