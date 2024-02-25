@@ -15,15 +15,16 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        UpdateUI();
         weapon.onShoot.AddListener(UpdateUI);
         health.onDamage.AddListener(UpdateUI);
+        health.onDie.AddListener(Respawn);
     }
 
     void UpdateUI()
     {
-        ammoText.text = weapon.clipAmmo + "/" + weapon.clipSize;
+        ammoText.text = weapon.clipAmmo + "/" + weapon.ammo;
         healthText.text = "HP " + health.health.ToString();
-        print(health.health);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,4 +35,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Respawn()
+    {
+        health.health = health.maxHealth;
+        transform.position = Vector3.zero;
+        UpdateUI();
+    }
 }
