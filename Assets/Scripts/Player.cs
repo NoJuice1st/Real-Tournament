@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     {
         UpdateUI();
         weapon.onShoot.AddListener(UpdateUI);
+        weapon.onReload.AddListener(UpdateUI);
         health.onDamage.AddListener(UpdateUI);
         health.onDie.AddListener(Respawn);
     }

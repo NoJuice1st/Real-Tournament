@@ -482,6 +482,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  shouldDestroy: 1
+  damageEffect: {fileID: 0}
+  deathEffect: {fileID: 0}
   onDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -843,6 +846,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  shouldDestroy: 0
+  damageEffect: {fileID: 0}
+  deathEffect: {fileID: 0}
   onDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -1284,6 +1290,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  shouldDestroy: 1
+  damageEffect: {fileID: 0}
+  deathEffect: {fileID: 0}
   onDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -1539,7 +1548,7 @@ GameObject:
   - component: {fileID: 1934426799}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1626,7 +1635,7 @@ Transform:
   m_GameObject: {fileID: 1934426793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 1, z: -6.75}
+  m_LocalPosition: {x: -5, y: 1, z: -5.879}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1646,6 +1655,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  shouldDestroy: 1
+  damageEffect: {fileID: 2074377927324055493, guid: 446f8d2ebda7b0444b682329952b11de,
+    type: 3}
+  deathEffect: {fileID: 3831883020278594889, guid: 12b9f4336f37016468f5f1c3946221e9,
+    type: 3}
   onDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -1771,6 +1785,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 811327139615924047}
   isburstFire: 0
+--- !u!95 &8243905540273356159
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639720510901493703}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7cbbb97a2d4ee349b97746ca9d3c37d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8243905540273356160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639720510901493703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbc330ac23e41f4cb6b41460deff57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8243905540273356159}
+  weapon: {fileID: 811327139615924047}
 --- !u!1001 &8635359861147581422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1920,8 +1969,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 413616115398796921, guid: b14e729a21f412d4ba7c23e227f5fb48,
         type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 8243905540273356160}
+    - targetCorrespondingSourceObject: {fileID: 413616115398796921, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 8243905540273356156}
+    - targetCorrespondingSourceObject: {fileID: 413616115398796921, guid: b14e729a21f412d4ba7c23e227f5fb48,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8243905540273356159}
   m_SourcePrefab: {fileID: 100100000, guid: b14e729a21f412d4ba7c23e227f5fb48, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

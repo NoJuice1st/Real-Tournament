@@ -24,6 +24,7 @@ public class Health : MonoBehaviour
     {
         health -= damage;
         onDamage.Invoke();
+        if(damageEffect != null) Instantiate(damageEffect, transform.position, Quaternion.identity);
         if (health <= 0) Die();
 
         if (health < 0) health = 0;
@@ -33,7 +34,6 @@ public class Health : MonoBehaviour
     {
         onDie.Invoke();
         if(deathEffect != null) Instantiate(deathEffect, transform.position, Quaternion.identity);
-        if(damageEffect != null) Instantiate(damageEffect, transform.position, Quaternion.identity);
         if(shouldDestroy) Destroy(gameObject);
     }
 }

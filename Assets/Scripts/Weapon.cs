@@ -84,7 +84,6 @@ public class Weapon : MonoBehaviour
 
         isReloading = true;
 
-        onReload.Invoke();
 
         await new WaitForSeconds(reloadTime);
         
@@ -95,5 +94,6 @@ public class Weapon : MonoBehaviour
         
         isReloading = false;
         
+        onReload.Invoke();
     }
 }
