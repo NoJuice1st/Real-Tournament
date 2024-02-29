@@ -23,9 +23,6 @@ public class Player : MonoBehaviour
         health.onDie.AddListener(Respawn);
     }
 
-    //RaycastHit hit;
-    //if (Input.GetKeyDown(KeyCode.E) && Physics.Raycast(transform.position, forward, out hit, pickUpDistance))
-
     private void Update()
     {
         var cam = Camera.main.transform;

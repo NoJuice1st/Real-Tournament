@@ -12,7 +12,7 @@ public class AnimationMod : MonoBehaviour
         animator = GetComponent<Animator>();
 
         weapon.onShoot.AddListener(RecoilAnim);
-        weapon.onReload.AddListener(ReloadAnim);
+        //weapon.onReload.AddListener(ReloadAnim);
 
         animator.SetFloat("ReloadTime", 1 / weapon.reloadTime);
         animator.SetFloat("FireRate", 1 / weapon.fireInterval);
