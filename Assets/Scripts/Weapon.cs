@@ -17,12 +17,12 @@ public class Weapon : MonoBehaviour
     public float spreadAngle = 5f;
 
     public bool isAutoFire;
+    bool isReloading;
 
-    public float reloadTime = 2f;
-    public float shootInterval;
+    public float reloadTime = 2f; // not in actual thing
+    public float fireInterval;
     
     float shootCooldown;
-    bool isReloading;
 
     public UnityEvent onRightClick;
     public UnityEvent onShoot;
@@ -74,7 +74,7 @@ public class Weapon : MonoBehaviour
 
         clipAmmo--;
 
-        shootCooldown = shootInterval;
+        shootCooldown = fireInterval;
         onShoot.Invoke();
     }
 
@@ -84,9 +84,9 @@ public class Weapon : MonoBehaviour
 
         isReloading = true;
 
+        onReload.Invoke();
 
         await new WaitForSeconds(reloadTime);
-        
         
         var ammoToReload = Mathf.Min(ammo, clipSize);
         ammo -= ammoToReload;
@@ -94,6 +94,5 @@ public class Weapon : MonoBehaviour
         
         isReloading = false;
         
-        onReload.Invoke();
     }
 }
