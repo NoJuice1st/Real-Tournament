@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2825965690859845987}
   - component: {fileID: 5854016064858456207}
   - component: {fileID: 5636593580321186874}
-  m_Layer: 3
+  - component: {fileID: 2301710650372380565}
+  m_Layer: 7
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413616115398796921}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: -0.48800004, z: 0.75}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.6}
   m_ConstrainProportionsScale: 0
@@ -99,11 +100,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 9046903931158002627, guid: 3f0c58353d4e11948af92a525d21b1ad,
     type: 3}
-  ammo: 0
+  bulletsPerShot: 1
+  ammo: 1000
   maxAmmo: 10
+  clipSize: 25
+  clipAmmo: 0
+  spreadAngle: 2
   isAutoFire: 1
   reloadTime: 2
-  shootInterval: 0.5
+  fireInterval: 0.05
+  shootCooldown: 0
+  onRightClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BurstMod, Assembly-CSharp
+        m_MethodName: BurstFire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  onShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  onReload:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &2301710650372380565
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413616115398796921}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1, y: 1.1, z: 1.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7993840475635278629
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +163,7 @@ GameObject:
   - component: {fileID: 3656932506167153067}
   - component: {fileID: 2688595353179646205}
   - component: {fileID: 3008016157137101588}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     public float reloadTime = 2f; // not in actual thing
     public float fireInterval;
     
-    float shootCooldown;
+    public float shootCooldown;
 
     public UnityEvent onRightClick;
     public UnityEvent onShoot;
@@ -32,22 +32,6 @@ public class Weapon : MonoBehaviour
     {
         if(clipAmmo <= 0) clipAmmo = clipSize;
         if (ammo <= 0) ammo = maxAmmo;
-    }
-
-    void Update()
-    {
-        //Manual Fire
-        if(!isAutoFire && Input.GetKeyDown(KeyCode.Mouse0)) Shoot();
-
-        //Auto Fire
-        if (isAutoFire && Input.GetKey(KeyCode.Mouse0)) Shoot();
-
-        if (Input.GetKeyDown(KeyCode.R) && ammo != maxAmmo) Reload();
-
-        if (Input.GetKeyDown(KeyCode.Mouse1)) onRightClick.Invoke();
-
-
-        if(shootCooldown >= 0) shootCooldown -= Time.deltaTime;
     }
 
     public void Shoot()
@@ -74,8 +58,8 @@ public class Weapon : MonoBehaviour
 
         clipAmmo--;
 
-        shootCooldown = fireInterval;
         onShoot.Invoke();
+        shootCooldown = fireInterval;
     }
 
     async public void Reload()
@@ -84,7 +68,6 @@ public class Weapon : MonoBehaviour
 
         isReloading = true;
 
-        onReload.Invoke();
 
         await new WaitForSeconds(reloadTime);
         
@@ -93,6 +76,7 @@ public class Weapon : MonoBehaviour
         clipAmmo += ammoToReload;
         
         isReloading = false;
-        
+        onReload.Invoke();
+
     }
 }

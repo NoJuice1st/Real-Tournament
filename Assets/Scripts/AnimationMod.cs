@@ -5,12 +5,11 @@ using UnityEngine;
 public class AnimationMod : MonoBehaviour
 {
     private Animator animator;
-    private Weapon weapon;
+    public Weapon weapon;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        weapon = GetComponent<Weapon>();
 
         weapon.onShoot.AddListener(RecoilAnim);
         weapon.onReload.AddListener(ReloadAnim);
