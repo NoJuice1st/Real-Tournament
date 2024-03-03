@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class Player : MonoBehaviour
     public Weapon weapon;
     public LayerMask weaponLayer;
     public Transform hand;
+
+    public UnityEvent onGrab;
+    public UnityEvent onDrop;
 
     private void Start()
     {
@@ -65,7 +69,10 @@ public class Player : MonoBehaviour
         weapon.transform.position = hand.position;
         weapon.transform.rotation = hand.rotation;
 
-        UpdateEvents(true);
+        weapon.onShoot.AddListener(UpdateUI);
+        weapon.onReload.AddListener(UpdateUI);
+
+        onGrab.Invoke();
         UpdateUI();
     }
 
@@ -73,27 +80,16 @@ public class Player : MonoBehaviour
     {
         if (weapon == null) return;
 
-        UpdateEvents(false);
+
+        weapon.onShoot.RemoveListener(UpdateUI);
+        weapon.onReload.RemoveListener(UpdateUI);
+        onDrop.Invoke();
 
         weapon.GetComponent<Rigidbody>().isKinematic = false;
         weapon.transform.SetParent(null);
         weapon = null;
 
         UpdateUI();
-    }
-
-    void UpdateEvents(bool isWeapon)
-    {
-        if (isWeapon)
-        {
-            weapon.onShoot.AddListener(UpdateUI);
-            weapon.onReload.AddListener(UpdateUI);
-        }
-        else
-        {
-            weapon.onShoot.RemoveListener(UpdateUI);
-            weapon.onReload.RemoveListener(UpdateUI);
-        }
     }
 
     void UpdateUI()
