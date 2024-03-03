@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
     public LayerMask weaponLayer;
     public Transform hand;
 
+    [Header("SoundClips")]
+    public AudioClip drop;
+    public AudioClip equip;
+
+    [Header("Events")]
     public UnityEvent onGrab;
     public UnityEvent onDrop;
 
@@ -63,6 +68,7 @@ public class Player : MonoBehaviour
     {
         if (weapon != null) return;
 
+        AudioSystem.Play(equip);
         weapon = gun.GetComponent<Weapon>();
         weapon.GetComponent<Rigidbody>().isKinematic = true;
         weapon.transform.SetParent(hand);
@@ -80,7 +86,7 @@ public class Player : MonoBehaviour
     {
         if (weapon == null) return;
 
-
+        AudioSystem.Play(drop);
         weapon.onShoot.RemoveListener(UpdateUI);
         weapon.onReload.RemoveListener(UpdateUI);
         onDrop.Invoke();

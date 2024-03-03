@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
         health = GetComponent<Health>();
         agent = GetComponent<NavMeshAgent>();
         if (!target) target = GameObject.FindWithTag("Player").transform;
+
     }
 
     private void Update()

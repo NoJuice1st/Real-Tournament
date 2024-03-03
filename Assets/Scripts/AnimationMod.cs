@@ -20,6 +20,7 @@ public class AnimationMod : MonoBehaviour
         weapon = player.weapon;
 
         weapon.onShoot.AddListener(RecoilAnim);
+        weapon.onReloadStart.AddListener(ReloadAnim);
 
         animator.SetFloat("ReloadTime", 1 / weapon.reloadTime);
         animator.SetFloat("FireRate", 1 / weapon.fireInterval);
@@ -28,6 +29,7 @@ public class AnimationMod : MonoBehaviour
     void RemoveWeapon()
     {
         weapon.onShoot.RemoveListener(RecoilAnim);
+        weapon.onReloadStart.RemoveListener(ReloadAnim);
     }
 
     void RecoilAnim()

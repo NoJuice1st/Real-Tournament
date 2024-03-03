@@ -24,8 +24,12 @@ public class Weapon : MonoBehaviour
     
     public float shootCooldown;
 
+    public AudioClip shot;
+    public AudioClip reload;
+
     public UnityEvent onRightClick;
     public UnityEvent onShoot;
+    public UnityEvent onReloadStart;
     public UnityEvent onReload;
     
     private void Start()
@@ -57,7 +61,7 @@ public class Weapon : MonoBehaviour
         }
 
         clipAmmo--;
-
+        AudioSystem.Play(shot);
         onShoot.Invoke();
         shootCooldown = fireInterval;
     }
@@ -67,11 +71,12 @@ public class Weapon : MonoBehaviour
         if (isReloading) return;
 
         isReloading = true;
-
-
+        onReloadStart.Invoke();
+        AudioSystem.Play(reload);
         await new WaitForSeconds(reloadTime);
         
-        var ammoToReload = Mathf.Min(ammo, clipSize);
+        var ammoToReload = Mathf.Min(ammo, clipSize - clipAmmo);
+        //print(ammo +" "+ clipSize);
         ammo -= ammoToReload;
         clipAmmo += ammoToReload;
         
