@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5854016064858456207}
   - component: {fileID: 5636593580321186874}
   - component: {fileID: 2301710650372380565}
+  - component: {fileID: 3197296228579873927}
+  - component: {fileID: 503006111770212537}
   m_Layer: 7
   m_Name: Gun
   m_TagString: Untagged
@@ -103,19 +105,24 @@ MonoBehaviour:
   bulletsPerShot: 1
   ammo: 1000
   maxAmmo: 10
-  clipSize: 25
+  clipSize: 10
   clipAmmo: 0
   spreadAngle: 2
   isAutoFire: 1
-  reloadTime: 2
-  fireInterval: 0.05
+  reloadTime: 1.5
+  fireInterval: 0.15
   shootCooldown: 0
+  shot: {fileID: 8300000, guid: 9ba4207c627f42740bbad6b1680202ee, type: 3}
+  reload: {fileID: 8300000, guid: 9087de3b77adbb04383339f132440929, type: 3}
   onRightClick:
     m_PersistentCalls:
+      m_Calls: []
+  onShoot:
+    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BurstMod, Assembly-CSharp
-        m_MethodName: BurstFire
+      - m_Target: {fileID: 503006111770212537}
+        m_TargetAssemblyTypeName: SoundMod, Assembly-CSharp
+        m_MethodName: playSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -124,8 +131,8 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
-  onShoot:
+        m_CallState: 2
+  onReloadStart:
     m_PersistentCalls:
       m_Calls: []
   onReload:
@@ -152,6 +159,47 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1, y: 1.1, z: 1.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3197296228579873927
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413616115398796921}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &503006111770212537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413616115398796921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb9901bef497944581deec88d9cc23d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!1 &7993840475635278629
 GameObject:
   m_ObjectHideFlags: 0

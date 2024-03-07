@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
 
     }
 
+
+
     private void Update()
     {
         agent.destination = target.position;
