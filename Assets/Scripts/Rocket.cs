@@ -20,12 +20,12 @@ public class Rocket : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) {
         var health = other.gameObject.GetComponent<Health>();
-
+ 
         if(health != null) health.Damage(damage);
 
         //wall hit effect
         var obj = Instantiate(hitPrefab, transform.position, Quaternion.identity);
-        obj.transform.forward = other.GetContact(0).normal;
+        obj.transform.forward = other.GetContact(0).normal * -1;
         obj.transform.SetParent(other.transform);
 
 

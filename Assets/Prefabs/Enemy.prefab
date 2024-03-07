@@ -128,6 +128,8 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   shouldDestroy: 1
+  isCustomColor: 1
+  customColor: {r: 0.47058827, g: 0.19607845, b: 0.13725491, a: 0}
   damageEffect: {fileID: 2074377927324055493, guid: 446f8d2ebda7b0444b682329952b11de,
     type: 3}
   deathEffect: {fileID: 3831883020278594889, guid: 12b9f4336f37016468f5f1c3946221e9,

@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
         UpdateUI();
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
         ammoText.gameObject.SetActive(weapon);
         if(weapon)ammoText.text = weapon.clipAmmo + "/" + weapon.ammo;

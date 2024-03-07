@@ -34,7 +34,10 @@ public class AnimationMod : MonoBehaviour
 
     void RecoilAnim()
     { 
-        animator.Play("GunRecoilAnim");
+        if(!animator.GetNextAnimatorStateInfo(0).IsName("GunRecoilAnim"))
+        {
+            animator.Play("GunRecoilAnim");
+        }
     }
 
     void ReloadAnim()

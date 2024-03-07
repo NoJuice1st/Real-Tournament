@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +9,8 @@ public class Health : MonoBehaviour
     public int health = 100;
     public int maxHealth = 100;
     public bool shouldDestroy = true;
+    public bool isCustomColor = false;
+    public Color customColor;
 
     public GameObject damageEffect;
     public GameObject deathEffect;
@@ -24,7 +27,14 @@ public class Health : MonoBehaviour
     {
         health -= damage;
         onDamage.Invoke();
-        if(damageEffect != null) Instantiate(damageEffect, transform.position, Quaternion.identity);
+        if(damageEffect != null) {
+            GameObject particles = Instantiate(damageEffect, transform.position, Quaternion.identity);
+            if(isCustomColor && particles.TryGetComponent<Renderer>(out Renderer renderer))
+            {
+                renderer.material.color = customColor;
+            }
+        }
+
         if (health <= 0) Die();
 
         if (health < 0) health = 0;
@@ -33,7 +43,14 @@ public class Health : MonoBehaviour
     public void Die()
     {
         onDie.Invoke();
-        if(deathEffect != null) Instantiate(deathEffect, transform.position, Quaternion.identity);
+        if(deathEffect != null) 
+        {
+            GameObject particles = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            if(isCustomColor && particles.TryGetComponent<Renderer>(out Renderer renderer))
+            {
+                renderer.material.color = customColor;
+            }
+        }
         if(shouldDestroy) Destroy(gameObject);
     }
 }
