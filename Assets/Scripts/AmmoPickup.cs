@@ -26,7 +26,7 @@ public class AmmoPickup : MonoBehaviour
                         {
                             part.SetActive(false);
                         }
-                        Invoke("ResetDebounce", 2f);
+                        Invoke("ResetDebounce", respawnTime);
                     }
                 }
             }

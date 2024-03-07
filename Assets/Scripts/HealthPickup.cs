@@ -27,7 +27,7 @@ public class HealthPickup : MonoBehaviour
                         {
                             part.SetActive(false);
                         }
-                        Invoke("ResetDebounce", 2f);
+                        Invoke("ResetDebounce", respawnTime);
                     }
                 }
             }
