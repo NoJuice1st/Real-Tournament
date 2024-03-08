@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,7 @@ public class Spawner : MonoBehaviour
 {
     [Header("Components")]
     public GameObject prefab;
+    public GameObject prefab2;
 
     public List<Transform> spawnPoints;
     public List<int> enemiesPerWave;
@@ -22,6 +24,7 @@ public class Spawner : MonoBehaviour
     public UnityEvent<int> onWaveEnd;
     public UnityEvent onWavesCleared;
 
+    private int originalEnemyAmount;
     private int enemiesLeft;
     private int wave = 0;
 
@@ -30,6 +33,7 @@ public class Spawner : MonoBehaviour
         foreach (var count in enemiesPerWave)
         {
             enemiesLeft = count;
+            originalEnemyAmount = enemiesLeft;
             onWaveStart.Invoke(wave);
 
             while (enemiesLeft > 0)
@@ -49,9 +53,25 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        var point = spawnPoints[Random.Range(0, spawnPoints.Count)];
+        var point = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
 
-        Instantiate(prefab, point.position, point.rotation);
-        onSpawn.Invoke();
+        if(originalEnemyAmount >= 5)
+        {
+            if(UnityEngine.Random.Range(0f, 10f) > 5)
+            {
+                Instantiate(prefab2, point.position, point.rotation);
+                onSpawn.Invoke();
+            }
+            else
+            {
+                Instantiate(prefab, point.position, point.rotation);
+                onSpawn.Invoke();
+            }
+        }
+        else
+        {
+            Instantiate(prefab, point.position, point.rotation);
+            onSpawn.Invoke();
+        }
     }
 }

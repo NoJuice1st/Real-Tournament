@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9805428a0cd664595a343cfd15a7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
+  speed: 800
   damage: 15
   bounceCount: 0
   explosionPrefab: {fileID: 4507870049406180591, guid: 351c26451498d8f4eb5d156fb1035e94,

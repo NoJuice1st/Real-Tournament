@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject grabText;
 
     [Header("Components")]
+    public Transform respawnLocation;
     public Health health;
     public Weapon weapon;
     public LayerMask weaponLayer;
@@ -116,7 +117,7 @@ public class Player : MonoBehaviour
     void Respawn()
     {
         health.health = health.maxHealth;
-        transform.position = Vector3.zero;
+        transform.position = respawnLocation.position;
         UpdateUI();
     }
 }
